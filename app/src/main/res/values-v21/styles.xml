@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="RedVelvet" parent="AppTheme">
+        <item name="colorPrimary">@android:color/holo_red_light</item>
+        <item name="colorAccent">@android:color/holo_orange_light</item>
+        <item name="android:colorBackground">@android:color/background_light</item>
+        <item name="android:navigationBarColor">@android:color/holo_red_light</item>
+        <item name="android:statusBarColor">?android:attr/colorPrimary</item>
+    </style>
+</resources>

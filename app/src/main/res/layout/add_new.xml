@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:id="@+id/addNewBottomSheet"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/addNew"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Every"
+                android:id="@+id/addMedicineEveryButtonSheet"
+                android:backgroundTint="#ffe205"
+                android:textColor="#ffffff"
+                android:layout_margin="10dp"/>
+            <EditText
+                android:id="@+id/timeEditTextt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="30"
+                android:layout_margin="10dp"
+                />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Minutes"
+                android:id="@+id/timeUnitButton"
+                android:backgroundTint="#ffe205"
+                android:textColor="#ffffff"
+                android:layout_margin="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name"/>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/medicineNameEditText"
+                android:hint="Methamphitamine 5mg"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ADD"
+        android:background="#ffe205"
+        android:id="@+id/addMedicineButton"
+        android:layout_centerVertical="true"
+        android:layout_alignEnd="@+id/addNew"
+        android:elevation="25dp"
+        android:layout_alignRight="@+id/addNew" />
+
+</RelativeLayout>

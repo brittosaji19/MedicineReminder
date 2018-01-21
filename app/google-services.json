@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "235279950606",
+    "firebase_url": "https://medicinereminder-a1a7d.firebaseio.com",
+    "project_id": "medicinereminder-a1a7d",
+    "storage_bucket": "medicinereminder-a1a7d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:235279950606:android:877fe5913202ffc7",
+        "android_client_info": {
+          "package_name": "com.brittosaji.medicinereminder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "235279950606-8neotsngb1om6as7v4luftt6cbqk8ouq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.brittosaji.medicinereminder",
+            "certificate_hash": "2fcffbc96dc6c18f3f662c7a59566a36e3e0ae23"
+          }
+        },
+        {
+          "client_id": "235279950606-rbnu2t2gr6hkuo9t8077odevocgods9j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBP2ZhxokA8kr4hbUVtGoA8OK_PchrWvH0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "235279950606-rbnu2t2gr6hkuo9t8077odevocgods9j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
