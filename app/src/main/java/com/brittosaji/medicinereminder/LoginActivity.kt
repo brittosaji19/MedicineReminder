@@ -3,6 +3,8 @@ package com.brittosaji.medicinereminder
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.FragmentActivity
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -19,6 +21,10 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_login.*
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DataSnapshot
+
+
 
 class LoginActivity : AppCompatActivity() {
     private val RC_SIGNIN:Int=123
@@ -101,6 +107,20 @@ class LoginActivity : AppCompatActivity() {
         currentUserRef.child("name").setValue(mAuth.currentUser?.displayName)
         currentUserRef.child("id").setValue(mAuth.currentUser?.uid)
         currentUserRef.child("email").setValue(mAuth.currentUser?.email)
+        // Read from the database
+        currentUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                //var value:User? = dataSnapshot.getValue(User::class.java)
+                Log.d("Output",dataSnapshot.toString())
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+                Log.w("Error", "Failed to read value.", error.toException())
+            }
+        })
 
         startActivity(Intent(this,MainActivity::class.java))
     }
