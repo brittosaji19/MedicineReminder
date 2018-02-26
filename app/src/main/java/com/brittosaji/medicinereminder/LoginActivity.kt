@@ -15,11 +15,16 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     private val RC_SIGNIN:Int=123
     private lateinit var mAuth: FirebaseAuth
+    lateinit var db:FirebaseDatabase
+    lateinit var userRef: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
         authHandler.addOnCompleteListener(this, OnCompleteListener {
             if(it.isSuccessful){
                 Toast.makeText(this,"Logged In",Toast.LENGTH_SHORT).show()
+                signInComplete()
                 val user=mAuth.currentUser
             }
             else{
@@ -79,11 +85,23 @@ class LoginActivity : AppCompatActivity() {
         signInHandler.addOnCompleteListener {
             if (it.isSuccessful){
                 Toast.makeText(this,"Logged in as : " +mAuth.currentUser,Toast.LENGTH_SHORT).show()
+                signInComplete()
             }
             else{
                 Toast.makeText(this,"Authentication Failure",Toast.LENGTH_SHORT).show()
             }
         }
 
+    }
+
+    private fun signInComplete(){
+        db= FirebaseDatabase.getInstance()
+        userRef=db.getReference()
+        val currentUserRef=userRef.child("users").child(mAuth.currentUser?.uid)
+        currentUserRef.child("name").setValue(mAuth.currentUser?.displayName)
+        currentUserRef.child("id").setValue(mAuth.currentUser?.uid)
+        currentUserRef.child("email").setValue(mAuth.currentUser?.email)
+
+        startActivity(Intent(this,MainActivity::class.java))
     }
 }

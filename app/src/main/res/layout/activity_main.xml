@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout android:layout_width="match_parent"
+
+<android.support.v4.widget.DrawerLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:minHeight="25dp"
-    android:minWidth="25dp"
+    android:id="@+id/parent_view"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context="com.brittosaji.medicinereminder.MainActivity">
+
+
+    <include layout="@layout/app_bar" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton3"
@@ -36,5 +44,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </android.support.constraint.ConstraintLayout>
+
+
+
+    <include layout="@layout/navigation_main"/>
+
+    </android.support.v4.widget.DrawerLayout>

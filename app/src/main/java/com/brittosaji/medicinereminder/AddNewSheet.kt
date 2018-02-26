@@ -7,6 +7,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.add_new.*
 
 /**
@@ -17,6 +20,9 @@ class AddNewSheet:BottomSheetDialogFragment(){
     lateinit var timeEditText:EditText
     lateinit var timeUnitButton:Button
     lateinit var medicineNameEditText:EditText
+    lateinit var db:FirebaseDatabase
+    lateinit var userRef:DatabaseReference
+    lateinit var mAuth:FirebaseAuth
     override fun setupDialog(dialog: Dialog?, style: Int) {
         super.setupDialog(dialog, style)
         val rootView = View.inflate(context, R.layout.add_new, null)
@@ -24,6 +30,13 @@ class AddNewSheet:BottomSheetDialogFragment(){
         dialog!!.setContentView(
                 rootView
         )
+
+        //Auth
+        mAuth= FirebaseAuth.getInstance()
+
+        //Init Database ..Firebase..
+
+
         timeEditText=rootView.findViewById(R.id.timeEditTextt)
         timeUnitButton=rootView.findViewById(R.id.timeUnitButton)
         medicineNameEditText=rootView.findViewById(R.id.medicineNameEditText)
