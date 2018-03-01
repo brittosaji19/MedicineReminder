@@ -2,6 +2,7 @@ package com.brittosaji.medicinereminder
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.Intent
 import android.support.design.widget.BottomSheetDialogFragment
 import android.view.View
 import android.widget.Button
@@ -23,6 +24,8 @@ class AddNewSheet:BottomSheetDialogFragment(){
     lateinit var db:FirebaseDatabase
     lateinit var userRef:DatabaseReference
     lateinit var mAuth:FirebaseAuth
+    lateinit var currentUserRef:DatabaseReference
+    lateinit var medicineRef:DatabaseReference
     override fun setupDialog(dialog: Dialog?, style: Int) {
         super.setupDialog(dialog, style)
         val rootView = View.inflate(context, R.layout.add_new, null)
@@ -35,7 +38,10 @@ class AddNewSheet:BottomSheetDialogFragment(){
         mAuth= FirebaseAuth.getInstance()
 
         //Init Database ..Firebase..
-
+        db= FirebaseDatabase.getInstance()
+        userRef=db.getReference()
+        currentUserRef=userRef.child("users").child(mAuth.currentUser?.uid)
+        medicineRef=currentUserRef.child("reminders")
 
         timeEditText=rootView.findViewById(R.id.timeEditTextt)
         timeUnitButton=rootView.findViewById(R.id.timeUnitButton)
@@ -53,8 +59,16 @@ class AddNewSheet:BottomSheetDialogFragment(){
     }
     fun addData():Unit{
         try {
+
             var timeData:Int=timeEditText.text.toString().toInt()
             var timeUnit:String=timeUnitButton.text.toString()
+            var medicineName:String=medicineNameEditText.text.toString()
+            val reminder=medicineRef.push()
+            reminder.child("name").setValue(medicineName)
+            reminder.child("time").setValue(timeData)
+            reminder.child("unit").setValue(timeUnit)
+            startActivity(Intent(context,MainActivity::class.java))
+            dismiss()
             val toast: Toast = Toast.makeText(context,"Every ${timeData} ${timeUnit}", Toast.LENGTH_SHORT)
             toast.show()
         }

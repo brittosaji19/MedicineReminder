@@ -112,19 +112,20 @@ class LoginActivity : AppCompatActivity() {
         currentUserRef.child("id").setValue(mAuth.currentUser?.uid)
         currentUserRef.child("email").setValue(mAuth.currentUser?.email)
         // Read from the database
-        currentUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                //var value:User? = dataSnapshot.getValue(User::class.java)
-                Log.d("Output",dataSnapshot.toString())
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-                Log.w("Error", "Failed to read value.", error.toException())
-            }
-        })
+//        currentUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
+//            override fun onDataChange(dataSnapshot: DataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                //var value:User? = dataSnapshot.getValue(User::class.java)
+//                val data=dataSnapshot.child("name").value
+//                Log.d("Output",data.toString())
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//                // Failed to read value
+//                Log.w("Error", "Failed to read value.", error.toException())
+//            }
+//        })
 
         startActivity(Intent(this,MainActivity::class.java))
     }
