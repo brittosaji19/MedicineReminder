@@ -11,7 +11,7 @@
         android:theme="@style/RedVelvet">
         <activity
             android:name=".MainActivity"
-            android:theme="@style/RedVelvet"></activity>
+            android:theme="@style/RedVelvet" />
         <activity
             android:name=".SplashActivity"
             android:noHistory="true">
@@ -21,8 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".dashboard"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".SignUpWithEmail"></activity>
     </application>
 
 </manifest>

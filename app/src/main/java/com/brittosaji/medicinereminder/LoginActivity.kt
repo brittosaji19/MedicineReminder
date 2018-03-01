@@ -46,6 +46,10 @@ class LoginActivity : AppCompatActivity() {
         signInButton.setOnClickListener {
             signInWithEmail(emailEditText.text.toString(),passwordEditText.text.toString())
         }
+
+        signUpButton.setOnClickListener {
+            startActivity(Intent(this,SignUpWithEmail::class.java))
+        }
     }
 
     private fun signInWithGoogle(signInClient: GoogleSignInClient){
