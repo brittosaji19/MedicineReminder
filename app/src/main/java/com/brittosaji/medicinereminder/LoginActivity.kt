@@ -69,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this,"Signed In Succesfully",Toast.LENGTH_SHORT).show()
             }
             catch (e:Exception){
+                Log.e("SignInFailure",e.message)
                 Toast.makeText(this,"SignIn Failed",Toast.LENGTH_SHORT).show()
             }
         }

@@ -1,4 +1,8 @@
 package com.brittosaji.medicinereminder
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.icu.text.CompactDecimalFormat
 import android.support.v7.app.AppCompatActivity
@@ -27,7 +31,10 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_new.*
 import kotlinx.android.synthetic.main.app_bar.*
 import kotlinx.android.synthetic.main.navigation_main.*
+import org.intellij.lang.annotations.JdkConstants
 import java.sql.Time
+import java.text.SimpleDateFormat
+import java.time.Year
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -140,6 +147,7 @@ class MainActivity : AppCompatActivity() {
         mAuth.signOut()
         startActivity(Intent(this,LoginActivity::class.java))
     }
+    lateinit var currentTime:Date
     private fun updateUI(){
         for (keys in reminders.children){
             //Log.d("Output",data.value.toString())
@@ -149,7 +157,7 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        val currentTime=Calendar.getInstance().time
+        currentTime=Calendar.getInstance().time
         val timeInMinutes=currentTime.hours*60+currentTime.minutes
         Log.d("Time:",timeInMinutes.toString())
 
@@ -183,6 +191,7 @@ class MainActivity : AppCompatActivity() {
                     alarmsList.add(alarm)
                 }
                 timeInc=timeInc+timeInt
+
             }
             alarmsList.sortBy { it->
                 it.time
@@ -192,8 +201,47 @@ class MainActivity : AppCompatActivity() {
         Log.d("Alarm:",alarmsList.toString())
         alarmsList.forEach {it->
             list.add(AlarmAdapter.AlarmsData(it.time,it.ampm,it.name))
+            //setAlarm(it)
         }
         alarmsListMain.adapter=AlarmAdapter(this@MainActivity,list)
+        setAlarm()
+    }
+
+    private fun setAlarm(){
+        val alarmManager=getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val calendar=Calendar.getInstance()
+        //calendar.timeZone= TimeZone.getTimeZone("IST")
+        val cal2=Calendar.getInstance()
+        calendar.set(cal2.get(Calendar.YEAR),cal2.get(Calendar.MONTH),cal2.get(Calendar.DATE),7,0,0)
+        val initTime=calendar.timeInMillis
+        //cal2.timeZone= TimeZone.getTimeZone("IST")
+        val currentTime=cal2.timeInMillis
+        //val givenDateString = "Tue Apr 23 16:08:28 GMT+05:30";
+        Log.d("TimeCheck",initTime.toString()+"::"+currentTime.toString())
+        remindersList.forEach {
+            var timeInc=initTime
+            var timeInt: Long
+            val alarmIntent=Intent(this,AlarmReceiver::class.java)
+            Log.i("Extra Name",it.name)
+            alarmIntent.putExtra("name",it.name)
+            val pendingIntent:PendingIntent= PendingIntent.getBroadcast(applicationContext,0,alarmIntent,PendingIntent.FLAG_UPDATE_CURRENT)
+            if (it.unit=="Hours"){
+                timeInt=it.time.toLong()*60*60*1000
+                if (currentTime>=initTime) {
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, initTime, timeInt,pendingIntent)
+                    Toast.makeText(this,"Setting Alarms",Toast.LENGTH_SHORT).show()
+                }
+            }
+            else{
+                timeInt=it.time.toLong()*60*1000
+                if (currentTime>=initTime) {
+                    alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, initTime, timeInt,pendingIntent)
+                    Toast.makeText(this,"Setting Alarms",Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        //alarmManager.set(AlarmManager.RTC_WAKEUP,System.currentTimeMillis()+10000,pendingIntent)
+
     }
 
 }
@@ -204,5 +252,6 @@ private fun DrawerLayout.toggle() {
     }else{
         openDrawer(Gravity.START)
     }
+
 }
 
