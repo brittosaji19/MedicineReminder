@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -32,7 +33,8 @@
 
         <activity android:name=".ManageReminder" />
         <activity android:name=".AddCaretaker" />
-        <activity android:name=".CaretakerDashboard"></activity>
+        <activity android:name=".CaretakerDashboard" />
+        <activity android:name=".ScannerActivity"></activity>
     </application>
 
 </manifest>
