@@ -11,6 +11,26 @@
         android:gravity="bottom"
         android:orientation="vertical">
 
+        <Button
+            android:id="@+id/addCaregiver"
+            style="@android:style/Widget.Holo.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Caretaker" />
+
+        <Button
+            android:id="@+id/manageButton"
+            style="@android:style/Widget.Holo.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manage Reminders" />
+
+        <Button
+            style="@android:style/Widget.Holo.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Caretaker's Dashboard"
+            android:id="@+id/CGDashboardButton"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

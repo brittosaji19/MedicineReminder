@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.brittosaji.medicinereminder">
-    <uses-permission android:name="android.permission.SET_ALARM"/>
+
+    <uses-permission android:name="android.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -25,9 +26,13 @@
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".SignUpWithEmail" />
-        <activity android:name=".AlarmActivity"></activity>
-        <receiver android:name=".AlarmReceiver"></receiver>
-    </application>
+        <activity android:name=".AlarmActivity" />
 
+        <receiver android:name=".AlarmReceiver" />
+
+        <activity android:name=".ManageReminder" />
+        <activity android:name=".AddCaretaker" />
+        <activity android:name=".CaretakerDashboard"></activity>
+    </application>
 
 </manifest>

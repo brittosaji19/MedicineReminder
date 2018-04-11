@@ -65,8 +65,16 @@ class MainActivity : AppCompatActivity() {
         userRef=db.getReference()
         currentUserRef=userRef.child("users").child(mAuth.currentUser?.uid)
         medicineRef=currentUserRef.child("reminders")
+        addCaregiver.setOnClickListener {
+            startActivity(Intent(this,AddCaretaker::class.java))
+        }
+        manageButton.setOnClickListener {
+            startActivity(Intent(this,ManageReminder::class.java))
+        }
 
-
+        CGDashboardButton.setOnClickListener {
+            startActivity(Intent(this,CaretakerDashboard::class.java))
+        }
 
         medicineRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
