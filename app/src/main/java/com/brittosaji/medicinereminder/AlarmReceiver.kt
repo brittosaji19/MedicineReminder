@@ -21,7 +21,7 @@ class AlarmReceiver:BroadcastReceiver(){
         val alarmActivityIntent=Intent(context,AlarmActivity::class.java)
         Log.i("Receive Test","Here: $medName")
         alarmActivityIntent.putExtra("medName","$medName")
-        //context?.startActivity(alarmActivityIntent)
+        context?.startActivity(alarmActivityIntent)
         val pendingIntent=PendingIntent.getActivity(context,0,alarmActivityIntent,PendingIntent.FLAG_ONE_SHOT)
         val notificationBuilder=NotificationCompat.Builder(context)
         notificationBuilder.setAutoCancel(true).setDefaults(Notification.DEFAULT_ALL).setSmallIcon(R.mipmap.ic_launcher).setContentTitle("Medicine Reminder").setContentText("Time To Take Your Meds").setDefaults(Notification.DEFAULT_SOUND or Notification.DEFAULT_LIGHTS).setContentIntent(pendingIntent)

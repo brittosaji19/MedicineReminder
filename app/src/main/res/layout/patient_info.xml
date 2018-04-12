@@ -40,4 +40,17 @@
         android:textSize="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/patientName" />
+
+    <Button
+        android:id="@+id/missedAlarmsButton"
+        style="@style/FirebaseUI.Button.AccountChooser.PhoneButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Missed Alarms"
+        app:layout_constraintEnd_toEndOf="@+id/removePatientButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patientEmail" />
 </android.support.constraint.ConstraintLayout>

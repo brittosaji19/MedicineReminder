@@ -1,7 +1,6 @@
 package com.brittosaji.medicinereminder
 
 import android.app.Activity
-import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +9,14 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.missed_alarm.view.*
 import kotlinx.android.synthetic.main.patient_info.view.*
 import java.util.ArrayList
 
 /**
  * Created by britto on 12/4/18.
  */
-class PatientAdapter(val activity: Activity, val patientData: ArrayList<PatientAdapter.PatientData>):BaseAdapter(){
+class MissedAdapter(val activity: Activity, val missedData: ArrayList<MissedAdapter.MissedData>):BaseAdapter(){
     private lateinit var mAuth: FirebaseAuth
     lateinit var db: FirebaseDatabase
     lateinit var userRef: DatabaseReference
@@ -30,21 +30,14 @@ class PatientAdapter(val activity: Activity, val patientData: ArrayList<PatientA
         userRef=db.getReference()
         currentUserRef=userRef.child("users").child(mAuth.currentUser?.uid)
         patientsRef=currentUserRef.child("patients")
-        val rootView:View=activity.layoutInflater.inflate(R.layout.patient_info,p2,false)
-        rootView.patientName.text=patientData[p0].patientName
-        rootView.patientEmail.text=patientData[p0].patientEmail
+        val rootView: View =activity.layoutInflater.inflate(R.layout.missed_alarm,p2,false)
+        rootView.missedNameTextView.text=missedData[p0].name
+        rootView.missedTime.text=missedData[p0].time
 
-        rootView.removePatientButton.setOnClickListener {
-            Toast.makeText(activity,"Remove Button Clicked", Toast.LENGTH_LONG).show()
-            patientsRef.child(patientData[p0].uid).removeValue().addOnSuccessListener {
-                Toast.makeText(activity,"Removed Successfully", Toast.LENGTH_SHORT).show()
-            }
+        rootView.dismissMissed.setOnClickListener {
+            userRef.child("users").child(missedData[p0].uid).child("missed_alarms").child(missedData[p0].missedID).removeValue()
+            Log.i("MissedAdapter",missedData[p0].missedID)
             activity.recreate()
-        }
-        rootView.missedAlarmsButton.setOnClickListener {
-            val missedListIntent= Intent(activity,MissedAlarms::class.java)
-            missedListIntent.putExtra("user",patientData[p0].patientID.toString())
-            activity.startActivity(missedListIntent)
         }
 
 
@@ -52,7 +45,7 @@ class PatientAdapter(val activity: Activity, val patientData: ArrayList<PatientA
     }
 
     override fun getItem(p0: Int): Any {
-        return patientData[p0]
+        return missedData[p0]
     }
 
     override fun getItemId(p0: Int): Long {
@@ -60,7 +53,7 @@ class PatientAdapter(val activity: Activity, val patientData: ArrayList<PatientA
     }
 
     override fun getCount(): Int {
-        return patientData.size
+        return missedData.size
     }
-    data class PatientData(val patientName:String,val patientEmail:String,val patientID:String,val uid:String)
+    data class MissedData(val name:String,val time:String,val uid:String,val missedID:String)
 }
