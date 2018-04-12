@@ -35,6 +35,7 @@
         <activity android:name=".AddCaretaker" />
         <activity android:name=".CaretakerDashboard" />
         <activity android:name=".ScannerActivity"></activity>
+        <activity android:name=".ocr.OcrCaptureActivity"/>
     </application>
 
 </manifest>
