@@ -50,7 +50,7 @@ class MissedService : Service() {
                             val missedServiceIntent=Intent(this@MissedService,MissedAlarms::class.java)
                             missedServiceIntent.putExtra("user",keys.child("uid").value.toString())
                             val pendingIntent= PendingIntent.getActivity(this@MissedService,1,missedServiceIntent, PendingIntent.FLAG_ONE_SHOT)
-                            notificationBuilder.setAutoCancel(true).setDefaults(Notification.DEFAULT_ALL).setSmallIcon(R.mipmap.ic_launcher).setContentTitle("Medicine Reminder").setContentText("Your Patient Missed An Alarm").setDefaults(Notification.DEFAULT_SOUND or Notification.DEFAULT_LIGHTS).setContentIntent(pendingIntent)
+                            notificationBuilder.setAutoCancel(true).setDefaults(Notification.DEFAULT_ALL).setSmallIcon(R.mipmap.ic_launcher).setContentTitle("Medicine Reminder").setContentText("Your Patient Has Missed Alarms").setDefaults(Notification.DEFAULT_SOUND or Notification.DEFAULT_LIGHTS).setContentIntent(pendingIntent)
                             val notificationManager=applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
                             if (p0?.childrenCount!! >0) {
                                 notificationManager.notify(1, notificationBuilder.build())
