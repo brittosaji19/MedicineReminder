@@ -39,8 +39,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:12.0.1'
     implementation 'com.firebaseui:firebase-ui-auth:3.2.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-
     implementation 'com.google.android.gms:play-services-vision:12.0.1'
+    implementation 'org.jsoup:jsoup:1.11.2'
 
     // Required only if Facebook login support is required
     //compile('com.facebook.android:facebook-android-sdk:4.27.0')

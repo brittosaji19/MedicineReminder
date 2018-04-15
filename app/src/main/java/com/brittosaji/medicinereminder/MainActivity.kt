@@ -4,6 +4,7 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.icu.text.CompactDecimalFormat
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -50,13 +51,14 @@ class MainActivity : AppCompatActivity() {
     val remindersList= ArrayList<Reminder>()
     val alarmsList=ArrayList<Alarm>()
     val list = ArrayList<AlarmAdapter.AlarmsData>()
+    var alarmCount:Int=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val appBar:Toolbar=appbar
         //setSupportActionBar(appBar)
         initializeDrawer()
-
+        startService(Intent(this,MissedService::class.java))
         //Getting Firebase Instance
         mAuth= FirebaseAuth.getInstance()
 
@@ -74,6 +76,14 @@ class MainActivity : AppCompatActivity() {
 
         CGDashboardButton.setOnClickListener {
             startActivity(Intent(this,CaretakerDashboard::class.java))
+        }
+
+        floatingActionButton3.setOnLongClickListener {
+           val sharedPref:SharedPreferences.Editor=this.getSharedPreferences("ALARM_PREF",0).edit()
+            sharedPref.putInt("count",0)
+            sharedPref.apply()
+            this.recreate()
+            true
         }
 
         medicineRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -204,6 +214,16 @@ class MainActivity : AppCompatActivity() {
             alarmsList.sortBy { it->
                 it.time
             }
+        }
+
+        val sharedPref=this.getSharedPreferences("ALARM_PREF",0)
+        alarmCount=sharedPref.getInt("count",0)
+        for ( i in 0..alarmCount-1){
+            val alarm_name=sharedPref.getString("alarm_name_"+i,"Null")
+            val alarm_time=sharedPref.getString("alarm_time_"+i,"Null")
+            val alarm_ampm=sharedPref.getString("alarm_ampm_"+i,"Null")
+            Log.i("AlarmsFromSharedPref",sharedPref.getString("alarm_name_"+i,"No Alarm Found")+":"+sharedPref.getString("alarm_time_"+i,"No Alarm Found")+":"+sharedPref.getString("alarm_ampm_"+i,"No Alarm Found"))
+            list.add(AlarmAdapter.AlarmsData(alarm_time,alarm_ampm,alarm_name))
         }
 
         Log.d("Alarm:",alarmsList.toString())

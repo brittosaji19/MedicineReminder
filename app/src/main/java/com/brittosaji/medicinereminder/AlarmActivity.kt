@@ -49,7 +49,7 @@ class AlarmActivity : AppCompatActivity() {
 
                 }
             }
-        },5000)
+        },15000)
         dismissButton.setOnClickListener {
             timer.cancel()
             finish()

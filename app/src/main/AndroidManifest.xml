@@ -36,7 +36,13 @@
         <activity android:name=".CaretakerDashboard" />
         <activity android:name=".ScannerActivity" />
         <activity android:name=".ocr.OcrCaptureActivity" />
-        <activity android:name=".MissedAlarms"></activity>
+        <activity android:name=".MissedAlarms" />
+        <activity android:name=".InfoActivity" />
+
+        <service
+            android:name=".MissedService"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>
